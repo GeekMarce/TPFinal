@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitácora de Uso de IA - IPETyM N° 246</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; color: #212529; }
+        .header-box { background: linear-gradient(135deg, #6b21a8, #4c1d95); color: white; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; }
+        .card { border: none; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 1.5rem; }
+        .card-header { background-color: #ffffff; border-bottom: 2px solid #e9ecef; font-weight: bold; }
+        .prompt-box { background-color: #f3f4f6; border-left: 4px solid #6b21a8; padding: 1rem; border-radius: 4px; font-family: monospace; font-size: 0.88rem; }
+        @media print {
+            body { background-color: white; }
+            .card { box-shadow: none; border: 1px solid #dee2e6; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-4">
+
+    <!-- CABECERA -->
+    <div class="header-box text-center text-md-start">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h5 class="text-uppercase tracking-wide opacity-75 mb-1">IPETyM N.º 246 "Dr. Amadeo Sabattini"</h5>
+                <h1 class="fw-bold mb-2">🤖 Bitácora de Uso de Inteligencia Artificial</h1>
+                <p class="mb-0"><strong>Curso:</strong> 7.º Año "C" — Especialidad Programación | <strong>Modalidad:</strong> Registro e Investigación Individual (8 Semanas)</p>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0 no-print">
+                <button onclick="window.print()" class="btn btn-light fw-bold" style="color: #6b21a8;">🖨️ Imprimir / Guardar PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DATOS DEL ALUMNO -->
+    <div class="card">
+        <div class="card-header text-purple fs-5" style="color: #6b21a8;">👤 Datos del Estudiante</div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Apellido y Nombre:</label>
+                    <div class="p-2 border rounded bg-light">________________________________________________</div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Nombre del Proyecto Web:</label>
+                    <div class="p-2 border rounded bg-light">________________________________________________</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INSTRUCCIONES DE USO -->
+    <div class="card border-info">
+        <div class="card-header bg-info text-dark fw-bold fs-5">ℹ️ ¿Cómo completar esta bitácora?</div>
+        <div class="card-body">
+            <p class="mb-1">El uso de herramientas de IA está <strong>fomentado y permitido</strong>. Como futuro técnico en programación, tenés la responsabilidad de **auditar, comprender y validar todo código e investigación que generes**.</p>
+            <p class="mb-0">Durante las 8 semanas de desarrollo debés registrar al menos <strong>3 interacciones clave con la IA</strong> (Investigación Teórica/Validaciones, Prepared Statements/Testing y Deploy/Configuración), transcribiendo tu prompt y explicando qué correcciones manuales tuviste que aplicar.</p>
+        </div>
+    </div>
+
+    <!-- REGISTROS POR ETAPAS DEL PROYECTO -->
+
+    <!-- REGISTRO 1: INVESTIGACIÓN, BBDD Y VALIDACIÓN DE DATOS -->
+    <div class="card">
+        <div class="card-header text-primary fs-5">📌 Registro 1: Investigación, BBDD y Validaciones DNI/CUIT/Email (Semanas 1 y 2)</div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label class="fw-bold">1. Herramienta(s) de IA utilizada(s):</label>
+                <div class="p-2 border rounded">_________________________________________________________________________________</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="fw-bold">2. Prompt principal enviado (Consulta sobre RBAC, validación DNI/CUIT o MER):</label>
+                <div class="prompt-box mb-2">
+                    Ej: "Dame una función PHP para validar formato de DNI argentino de 7 u 8 dígitos y un regex para CUIT..."
+                </div>
+                <div class="p-3 border rounded bg-light" style="min-height: 60px;"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="fw-bold">3. Reclamos / Errores de la IA y Correcciones aplicadas:</label>
+                <p class="text-muted small mb-1">¿La IA propuso una validación insegura o no contempló el formato sin guiones? Explica la corrección aplicada.</p>
+                <div class="p-3 border rounded bg-light" style="min-height: 65px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGISTRO 2: SEGURIDAD, TESTING Y SELECT2 -->
+    <div class="card">
+        <div class="card-header text-primary fs-5">📌 Registro 2: Prepared Statements, Plan de Testing y Select2 (Semanas 3, 4 y 5)</div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label class="fw-bold">1. Herramienta(s) de IA utilizada(s):</label>
+                <div class="p-2 border rounded">_________________________________________________________________________________</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="fw-bold">2. Prompt principal enviado (Consulta sobre Prepared Statements o script de Testing):</label>
+                <div class="prompt-box mb-2">
+                    Ej: "Cómo escribir una prueba unitaria simple en PHP para comprobar si una contraseña cumple las reglas de seguridad..."
+                </div>
+                <div class="p-3 border rounded bg-light" style="min-height: 60px;"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="fw-bold">3. Reclamos / Errores de la IA y Correcciones aplicadas:</label>
+                <p class="text-muted small mb-1">Ej: ¿La IA intentó usar librerías externas complejas en lugar de una prueba unitaria pura en PHP? ¿Cómo lo resolviste?</p>
+                <div class="p-3 border rounded bg-light" style="min-height: 65px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGISTRO 3: DEPLOY Y SERVIDOR -->
+    <div class="card">
+        <div class="card-header text-primary fs-5">📌 Registro 3: `.htaccess`, `config.php` y Deploy Cloud (Semanas 6 y 7)</div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label class="fw-bold">1. Herramienta(s) de IA utilizada(s):</label>
+                <div class="p-2 border rounded">_________________________________________________________________________________</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="fw-bold">2. Prompt principal enviado (Consulta sobre `.htaccess` o InfinityFree):</label>
+                <div class="prompt-box mb-2">
+                    Ej: "Dame las reglas de .htaccess para ocultar el listado de directorios y redirigir errores 404 en servidor Apache..."
+                </div>
+                <div class="p-3 border rounded bg-light" style="min-height: 60px;"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="fw-bold">3. Reclamos / Errores de la IA y Correcciones aplicadas:</label>
+                <div class="p-3 border rounded bg-light" style="min-height: 65px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REFLEXIÓN PERSONAL -->
+    <div class="card border-primary">
+        <div class="card-header bg-primary text-white fw-bold fs-5">💡 Conclusión sobre la Integración de IA</div>
+        <div class="card-body">
+            <label class="fw-bold mb-2">¿En qué aspecto del desarrollo la IA fue más útil y qué lección aprendiste sobre la importancia de verificar su código antes de llevarlo a producción?</label>
+            <div class="p-3 border rounded bg-light" style="min-height: 80px;"></div>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="text-center text-muted mt-4 small">
+        <p>Especialidad Programación — IPETyM N.º 246 "Dr. Amadeo Sabattini"</p>
+    </div>
+
+</div>
+
+</body>
+</html>
