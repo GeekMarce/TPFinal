@@ -1,0 +1,571 @@
+# PROMPT MAESTRO — LIFEFLOW
+## Visión del producto, requisitos académicos, diseño y planificación
+
+Actuá como analista funcional, diseñador de producto, arquitecto de software y tutor de programación. Ayudame a definir y desarrollar una aplicación web llamada provisionalmente **LifeFlow**. El nombre definitivo todavía no está decidido; quiero elegir uno mejor en el futuro si el proyecto se convierte en una aplicación real.
+
+No empieces a programar todavía. Primero organizá la idea, distinguí decisiones confirmadas de propuestas y dudas, detectá contradicciones y haceme preguntas concretas cuando una decisión importante esté sin definir. No elimines requisitos silenciosamente ni inventes decisiones como si yo ya las hubiera tomado.
+
+---
+
+# 1. CONTEXTO DEL TRABAJO PRÁCTICO
+
+Estoy realizando un Trabajo Práctico Integrador individual de aproximadamente **8 semanas** para IPETyM N.º 246 “Dr. Amadeo Sabattini”, 7.º Año C, especialidad Programación.
+
+El objetivo es concebir, diseñar, investigar, programar, probar, documentar y publicar una aplicación web Full Stack dinámica con MySQL, aplicando Personal Kanban, pruebas y buenas prácticas. Debo poder explicar y defender el proyecto individualmente.
+
+## Requisitos obligatorios
+- Aplicación web Full Stack con PHP y MySQL.
+- Al menos 5 tablas relacionales con claves primarias y foráneas.
+- Entre 5 y 10 registros ficticios y coherentes por tabla.
+- Inicio de sesión.
+- Sistema de roles/permisos que demuestre las cuatro capacidades exigidas: **Crear, Editar, Eliminar y Solo Lectura**. Los nombres de los roles pueden adaptarse a LifeFlow, pero esas capacidades deben quedar cubiertas y verificarse en el servidor.
+- Contraseñas protegidas con `password_hash()` y verificadas con `password_verify()`.
+- Todas las consultas SQL mediante sentencias preparadas con `prepare`, `bind_param` y `execute`.
+- Validación tanto en frontend como en backend.
+- Si se almacenan emails, validar en HTML con `type="email"` y en PHP con `filter_var($email, FILTER_VALIDATE_EMAIL)`.
+- Si se almacenan DNI/CUIT/CUIL, validar el formato correspondiente y usar únicamente datos ficticios en pruebas. No usar datos personales reales.
+- Integrar **Select2** en el frontend para seleccionar relaciones mediante claves foráneas, por ejemplo, categorías.
+- Interfaz responsive.
+- Personal Kanban y seguimiento del avance.
+- Plan de pruebas manuales y al menos una prueba unitaria demostrable.
+- Manual técnico y manual de usuario con capturas dentro de `/docs`.
+- Bitácora de uso de IA dentro de `/docs`.
+- Despliegue en InfinityFree, configuración adaptable a entorno local y producción, reglas de seguridad con `.htaccess` y backup SQL verificado.
+- Investigar y documentar: RBAC y los cuatro permisos; inyección SQL y sentencias preparadas; `.htaccess`, `Options -Indexes` y protección de archivos sensibles; configuración dinámica `config.php`; historias de usuario y criterios de aceptación; Personal Kanban y límites WIP; QA y pruebas manuales, unitarias y de límites.
+- No subir credenciales ni secretos de producción al repositorio.
+- Código comentado con encabezados que expliquen propósito, parámetros y permisos.
+
+La evaluación contempla aproximadamente:
+- Trabajo presencial y avance: 30 %.
+- Backend, base de datos y permisos: 25 %.
+- Metodología, QA, documentación y repositorio: 15 %.
+- Despliegue y backup: 15 %.
+- Frontend y defensa: 15 %.
+
+Debo registrar el avance presencial de las ocho semanas en la hoja de seguimiento que requiere la institución.
+
+## Cómo quiero aprender y trabajar
+- Explicame los conceptos técnicos de forma clara y apta para un estudiante; definí brevemente términos difíciles entre paréntesis cuando sea útil.
+- Quiero comprender el código, no solamente copiarlo.
+- No empieces a programar hasta que la planificación funcional y el modelo de datos estén suficientemente definidos y yo te indique que avancemos.
+- Priorizá opciones gratuitas; no conviertas servicios pagos en requisitos.
+- No supongas que todo puede terminarse en ocho semanas. Ayudame a diferenciar una entrega académica mínima y funcional de la visión completa futura.
+- Si algo es demasiado grande, proponé etapas sin borrar la idea a largo plazo.
+- Mantené actualizada una lista de requisitos confirmados, decisiones, dudas, riesgos y tareas pendientes.
+
+---
+
+# 2. VISIÓN Y OBJETIVO DEL PRODUCTO
+
+LifeFlow es un organizador personal integral para ayudar a las personas a organizar su tiempo, crear rutinas, ser más responsables y reforzar las buenas costumbres.
+
+**Objetivo general propuesto:** diseñar, desarrollar, probar, documentar y publicar una aplicación web Full Stack que permita gestionar tareas, hábitos, rutinas flexibles, horarios y objetivos; consultar la organización en un calendario y panel diario; y visualizar la constancia mediante estadísticas y rachas, usando una base de datos relacional y buenas prácticas de seguridad.
+
+## Público objetivo
+- Estudiantes.
+- Empleados.
+- Empresarios.
+- Cualquier persona que necesite organizarse de manera más simple.
+
+## Qué la diferenciaría de una agenda común
+- Sistema de rachas que compense o refuerce las buenas costumbres.
+- Experiencia extremadamente simple de usar.
+- Sistema de cuentas en la nube.
+- Espacios específicos para tareas, hábitos, rutinas, calendario, estadísticas y demás funciones, sin mezclarlas confusamente.
+
+## Estilo y sensación
+- Minimalista, tranquilo y profesional.
+- Tema claro y oscuro.
+- Interfaz simple, ordenada y fácil de aprender.
+
+## Visión futura
+Quiero que la aplicación pueda convertirse en una app real en el futuro. El nombre “LifeFlow” es provisional: más adelante quiero encontrar un nombre propio que encaje con el producto. La arquitectura debe permitir ampliaciones futuras sin perder de vista las ocho semanas del trabajo escolar.
+
+---
+
+# 3. PANTALLA PRINCIPAL Y NAVEGACIÓN
+
+- La pantalla principal tendrá un menú o sección Home con un resumen de los otros apartados. Se puede proponer una alternativa mejor si se explica y se consulta antes de cambiar la idea.
+- Todavía no está definido qué información debe aparecer primero al abrir la aplicación. Proponé una opción coherente con la simplicidad, el resumen de pendientes y el progreso del día.
+- El usuario podrá elegir la vista del calendario: diaria, semanal, mensual u otras vistas útiles.
+- La visualización de tareas todavía está abierta a diseño: lista, tarjetas, columnas por estado o combinación. Recomendá la más simple de usar.
+- Debe haber tema claro y oscuro.
+- Las secciones deben tener funciones diferenciadas y ser fáciles de encontrar.
+- La versión móvil no es prioridad inicial, aunque conviene que la aplicación sea responsive y utilizable en pantallas pequeñas.
+
+---
+
+# 4. MÓDULO DE TAREAS
+
+Cada tarea debería poder incluir:
+- Título.
+- Descripción.
+- Fecha límite.
+- Prioridad.
+- Color por categoría.
+- Categoría personalizada.
+- Proyecto personalizado, si corresponde.
+- Estado.
+
+## Estados deseados
+1. Pendiente.
+2. Completada.
+3. Cancelada.
+4. Postergada con justificación.
+5. Postergada sin justificación, identificada como procrastinación.
+
+Definí claramente los estados para que no haya duplicidades ni estadísticas engañosas. No conviertas automáticamente “cancelada” en “incumplida” ni “postergada” en “completada”.
+
+## Fechas y horarios
+- En general, las tareas tendrán fecha límite; no todas necesitan hora de inicio y finalización.
+- Si una tarea corresponde a una rutina, debería poder indicarse que se debe hacer ese día.
+- Los horarios específicos importan cuando el usuario los necesita, por ejemplo, por trabajo, escuela u otro compromiso.
+- El usuario podrá personalizar este comportamiento según el tipo de actividad.
+
+## Organización y repetición
+- Quiero categorías y proyectos, ambos personalizables.
+- Las tareas repetitivas deberían admitir las opciones razonables: diaria, ciertos días, semanal, mensual u otros intervalos elegidos por el usuario.
+- Definí cómo se relacionan tareas, proyectos, categorías, rutinas y calendario sin volver complicada la interfaz.
+
+Si aparece un imprevisto, el usuario podrá reorganizar su día. Debe definirse cómo se actualizan las tareas o actividades afectadas y cómo influye el cambio en el cumplimiento diario.
+
+---
+
+# 5. MÓDULO DE HÁBITOS
+
+Un hábito es algo que el usuario quiere realizar cada cierto tiempo: por día, semana, mes u otro intervalo que defina.
+
+## Frecuencia y programación
+El usuario debería poder:
+- Elegir los días en que debe realizar el hábito.
+- Elegir cuántas veces debe realizarlo dentro de cierto período.
+- Definir horarios cuando sean relevantes.
+- Ver los hábitos programados como parte de un calendario.
+
+La frecuencia debe ser flexible para hábitos diarios, semanales, mensuales o personalizados, pero la interfaz debe seguir siendo sencilla.
+
+## Registro de cumplimiento
+El usuario registrará el resultado mediante etiquetas/estados considerados:
+- Pendiente.
+- Completada.
+- Cancelada.
+- Postergada con justificación.
+- Postergada sin justificación/procrastinación.
+
+Hay que decidir qué estados se aplican a hábitos y cuáles a tareas, y definir su efecto en las rachas y estadísticas. No asumir que todos los estados funcionan igual en todos los módulos.
+
+## Historial
+Quiero que todo quede guardado. Debe existir historial de los registros de hábitos y posibilidad de corregir registros anteriores. Definí cómo se registra una corrección y cómo se recalculan estadísticas y rachas de forma coherente.
+
+---
+
+# 6. RACHAS, CONSTANCIA Y RECOMPENSAS
+
+Este es uno de los elementos diferenciadores más importantes.
+
+## Regla propuesta por mí
+- Si el usuario no completa al menos el **70 % de sus hábitos diarios**, la racha de días vuelve a cero.
+- Si el día estuvo justificado —por ejemplo, por un imprevisto—, el usuario puede elegir restaurar la racha.
+- Ejemplo conceptual: “Perdiste tu racha, racha actual: 0”, con un botón para restaurarla mediante una justificación.
+
+## Decisiones pendientes que hay que resolver antes de programar
+- Cómo calcular el 70 %: qué hábitos cuentan como programados ese día, qué pasa con hábitos cancelados o reprogramados y cómo se redondean porcentajes.
+- Qué pasa si no hay hábitos programados en un día.
+- Si una justificación requiere motivo escrito, categoría o ambos.
+- Si restaurar recupera toda la racha anterior, evita la interrupción o aplica otra regla.
+- Si se puede restaurar ilimitadamente o habrá límites.
+- Cómo evitar que se manipule una racha sin perder flexibilidad ante situaciones justificadas.
+- Diferencia entre racha actual y mejor racha histórica.
+- Cómo manejar días futuros, días incompletos, zonas horarias y correcciones de registros pasados.
+
+No cambies mi regla central del 70 % sin explicarlo y consultarme. Podés sugerir alternativas si detectás problemas de diseño o motivación, pero distinguí mi propuesta de tu recomendación.
+
+## Recompensas y metas
+Quiero que el sistema refuerce las buenas costumbres. También quiero objetivos y metas, por ejemplo:
+- Cumplir un hábito cierta cantidad de días.
+- Mantener un porcentaje de cumplimiento.
+- Completar cierta cantidad de tareas.
+
+Todavía hay que definir qué significa “recompensar”: puede ser una recompensa visual, insignias, logros, mensajes positivos u otro sistema. Proponé opciones sencillas y no manipuladoras y consultame antes de convertirlas en requisitos definitivos.
+
+## Estadísticas prioritarias
+- Rachas.
+- Porcentaje de hábitos cumplidos.
+- Tareas terminadas.
+- Objetivos y metas.
+- Evolución del progreso a lo largo del tiempo.
+
+---
+
+# 7. RUTINAS Y PLANTILLAS
+
+Para mí, una rutina es principalmente una **lista de hábitos**.
+
+- Quiero crear rutinas usando plantillas.
+- Se pueden proponer plantillas iniciales, por ejemplo, mañana, estudio o preparación para dormir, pero no deben imponerse sin que yo las revise.
+- El usuario podrá personalizar las rutinas.
+- Las rutinas deben ser lo más simples posible de usar.
+- Quiero una rutina estándar que se repita en los días de la semana elegidos por el usuario.
+- Cambiar una actividad de un martes específico no debe cambiar automáticamente todos los martes.
+- El usuario podrá modificar una ocurrencia concreta o cambiar la rutina estándar para sus repeticiones futuras, de manera clara.
+- El usuario puede adaptar su día cuando tenga un imprevisto.
+
+## Superposición de actividades
+Por ahora quiero **permitir que dos actividades se superpongan**. No bloquearlas automáticamente. Se puede proponer una advertencia no intrusiva, pero consultame antes de imponer restricciones.
+
+---
+
+# 8. CALENDARIO, HORARIOS Y PANEL DIARIO
+
+## Calendario
+Quiero ver todo lo pertinente:
+- Tareas.
+- Hábitos.
+- Rutinas y sus actividades.
+- Fechas límite.
+- Actividades con horarios.
+- Estados de cumplimiento y otros elementos definidos.
+
+El usuario debe poder elegir vistas diarias, semanales y mensuales.
+
+## Interacción
+- Quiero arrastrar actividades en el calendario para cambiar sus horarios.
+- Los cambios deben reflejarse correctamente en los registros y distinguir entre modificar una sola ocurrencia y cambiar la rutina estándar.
+- Si una actividad no tiene hora definida, representala sin inventarle una hora.
+
+## Actividades que cruzan medianoche
+La aplicación debe permitir actividades que comiencen un día y terminen después de medianoche, por ejemplo, de 23:00 a 01:00. El modelo de datos y las validaciones deben contemplarlo.
+
+## Panel diario
+Debe mostrar principalmente:
+- Resumen de pendientes.
+- Progreso del día.
+- Actividades y hábitos pertinentes a la fecha seleccionada.
+
+El usuario podrá reorganizar el día ante imprevistos. Definí cómo se actualiza el progreso y qué opciones de justificación se ofrecen cuando no se alcanza el 70 %.
+
+---
+
+# 9. CUENTAS, NUBE Y RELACIÓN PADRE/HIJO
+
+## Cuentas individuales
+La aplicación tendrá cuentas individuales y los datos de cada persona deberán estar separados y protegidos. Cada usuario tendrá sus propios hábitos, tareas, rutinas, metas, estadísticas e historial.
+
+## Cuenta de padre/madre o tutor
+Quiero una función de **cuenta de padre/madre** para que los padres puedan gestionar las cuentas de sus hijos. Las cuentas de los hijos también serán individuales y, en el futuro, podrán desvincularse de la cuenta padre.
+
+Antes de implementarla, ayudame a definir:
+- Qué puede ver y modificar el adulto.
+- Si puede crear tareas, hábitos y rutinas para el hijo.
+- Cómo se concede y revoca la relación entre cuentas.
+- Cómo se solicita y realiza la desvinculación futura.
+- Cómo se protege la privacidad y autonomía del menor según su edad y contexto.
+- Qué pasa con los datos cuando se desvincula.
+- Si el hijo tiene acceso a sus datos y qué acciones requieren supervisión.
+- Cómo impedir accesos no autorizados.
+
+No asumas que una cuenta padre es simplemente un administrador técnico. Es una relación especial entre cuentas que debe modelarse de forma explícita y segura.
+
+## Nube
+Quiero vincular la aplicación con un sistema de cuentas en la nube. Para el trabajo escolar debe existir una implementación realista con cuentas y base de datos remotas si las condiciones lo permiten. No prometas sincronización ni disponibilidad que no se hayan implementado y probado.
+
+## Notificaciones y exportación
+Me interesan:
+- Notificaciones.
+- Exportación de datos de la cuenta.
+
+Todavía hay que definir canales, tipos, permisos y formatos. Priorizá opciones gratuitas y compatibles con el alcance académico.
+
+---
+
+# 10. ROLES Y PERMISOS
+
+Quiero un sistema de roles más acorde con LifeFlow, no necesariamente roles que literalmente se llamen “Crear”, “Editar”, “Eliminar” y “Solo lectura”.
+
+Sin embargo, el trabajo escolar exige demostrar esas cuatro capacidades. Por eso:
+- Diseñá nombres de roles que tengan sentido en LifeFlow.
+- Definí una matriz que demuestre qué roles pueden crear, editar, eliminar y consultar en modo solo lectura.
+- Verificá permisos en el servidor en cada acción, no solo ocultando botones.
+- Separá autenticación de autorización: el login identifica al usuario; los permisos determinan qué puede hacer.
+- Tené en cuenta cuentas individuales, relación padre/tutor, datos propios y relación de tutela.
+- Evitá que un usuario acceda, edite o elimine datos ajenos sin autorización.
+- Comprobá en backend la propiedad de cada registro.
+- Proponé una matriz compatible con los requisitos escolares y preguntame antes de darla por definitiva.
+
+No diseñes permisos que permitan a un padre acceder sin límites a datos que no le correspondan ni supongas que un rol global reemplaza las comprobaciones de propiedad de los registros.
+
+---
+
+# 11. MODELO DE DATOS INICIAL
+
+La planificación anterior contemplaba ocho tablas y luego añadió categorías para Select2. La propuesta actual tiene **nueve tablas iniciales**, pero debe revisarse para cubrir las funciones finales.
+
+## Tablas propuestas
+1. `usuarios`: `id_usuario` (PK), `nombre`, `email` (único), `password_hash`, `id_rol` (FK).
+2. `roles`: `id_rol` (PK), `nombre`, `descripcion`.
+3. `habitos`: `id_habito` (PK), `id_usuario` (FK), `nombre`, `frecuencia`, `activo`.
+4. `registros_habitos`: `id_registro` (PK), `id_habito` (FK), `fecha`, `cumplido` o un estado que debe revisarse para admitir las etiquetas deseadas.
+5. `tareas`: `id_tarea` (PK), `id_usuario` (FK), `id_categoria` (FK), `titulo`, `prioridad`, `estado`, `fecha_limite`.
+6. `categorias`: `id_categoria` (PK), nombre y posiblemente descripción. Definir si son globales o personalizadas por usuario y cómo se guarda su color.
+7. `rutinas`: `id_rutina` (PK), `id_usuario` (FK), `nombre`, `activa`.
+8. `actividades_rutina`: `id_actividad` (PK), `id_rutina` (FK), `dia_semana`, `hora_inicio`, `hora_fin`.
+9. `excepciones_rutina`: `id_excepcion` (PK), `id_actividad` (FK), `fecha`, `tipo`, `hora_inicio`, `hora_fin`.
+
+## Relaciones previstas
+- `roles` 1:N `usuarios`.
+- `usuarios` 1:N `habitos`.
+- `usuarios` 1:N `tareas`.
+- `usuarios` 1:N `rutinas`.
+- `habitos` 1:N `registros_habitos`.
+- `categorias` 1:N `tareas`.
+- `rutinas` 1:N `actividades_rutina`.
+- `actividades_rutina` 1:N `excepciones_rutina`.
+
+## Advertencia
+Este esquema es una base inicial, no un modelo definitivo ni completo para todas las funciones. No fuerces todo dentro de estas nueve tablas si el diseño resultara incorrecto. Revisá qué entidades adicionales hacen falta para:
+- Proyectos y tareas repetitivas.
+- Frecuencias complejas de hábitos y horarios.
+- Estados e historial de cumplimiento.
+- Rachas, justificaciones y restauraciones.
+- Objetivos, metas, recompensas e insignias.
+- Actividades con horario y que cruzan medianoche.
+- Excepciones de una ocurrencia y cambios a la rutina estándar.
+- Relaciones entre padres/tutores e hijos y desvinculación.
+- Notificaciones y exportación de datos.
+- Roles y permisos, si requieren un modelo más flexible.
+
+Mantené la base relacional, normalizada de forma razonable y comprensible para un estudiante. Explicá cada tabla y relación con lenguaje sencillo. Definí PK, FK, restricciones únicas y reglas de integridad. Por ejemplo, una combinación hábito-fecha no debería duplicarse si se adopta un único registro diario por hábito. Los datos de prueba deben ser ficticios y coherentes, con 5–10 registros por tabla para cumplir el trabajo.
+
+La racha debería calcularse a partir de registros y reglas de frecuencia, no guardarse como un valor redundante sin estrategia de consistencia. Si proponés almacenar valores calculados por rendimiento, explicá cómo se mantienen actualizados.
+
+---
+
+# 12. SEGURIDAD Y CALIDAD
+
+Implementá y documentá:
+- Autenticación segura y manejo apropiado de sesiones.
+- `password_hash()` y `password_verify()`.
+- Consultas preparadas en todas las operaciones SQL.
+- Validación en frontend y backend.
+- Comprobación de permisos en servidor.
+- Comprobación de propiedad de cada registro para impedir accesos o modificaciones cruzadas entre usuarios.
+- Validación de email en HTML y PHP.
+- Protección contra inyección SQL.
+- Protección de archivos sensibles y listado de directorios mediante `.htaccess`, incluyendo `Options -Indexes` cuando sea compatible con el hosting.
+- Configuración separada y dinámica para entorno local y producción, por ejemplo `config.php`, sin credenciales publicadas.
+- Manejo de errores sin filtrar secretos ni información sensible.
+- Backup SQL y prueba real de restauración.
+- Plan de pruebas manuales, pruebas de límites y una prueba unitaria demostrable.
+- Datos ficticios; nunca usar datos personales reales en pruebas.
+
+## Casos de prueba iniciales sugeridos
+1. Login válido abre el panel.
+2. Contraseña incorrecta no permite ingresar.
+3. Una tarea sin título se rechaza.
+4. No se duplica el registro de un mismo hábito y fecha, si esa es la regla final.
+5. Una excepción de rutina no modifica la rutina estándar.
+6. Una operación sin permiso es rechazada por el servidor.
+7. Una cuenta no puede acceder al registro de otra.
+8. Cambiar la fecha del calendario muestra las actividades correctas.
+9. Corregir un registro histórico recalcula correctamente la racha.
+10. Restaurar el backup SQL recupera tablas y datos.
+
+Una prueba unitaria útil sería la función de cálculo de rachas, con casos de días consecutivos, días incumplidos, días no programados, justificaciones y registros históricos.
+
+---
+
+# 13. TECNOLOGÍAS, REPOSITORIO Y PUBLICACIÓN
+
+## Tecnologías previstas
+- PHP.
+- MySQL.
+- HTML, CSS y JavaScript.
+- Select2 para seleccionar relaciones por clave foránea.
+- Git y GitHub.
+- InfinityFree para el despliegue escolar, sujeto a comprobar sus capacidades y limitaciones actuales.
+
+No agregues frameworks o servicios adicionales sin explicar por qué convienen y si son necesarios. Priorizá una solución que yo pueda comprender y mantener.
+
+## Estructura inicial del repositorio
+Se puede ajustar según la arquitectura final:
+
+`lifeflow/`
+- `public/` — páginas y recursos públicos.
+- `src/` — lógica PHP y módulos.
+- `config/` — configuración.
+- `database/` — esquema y datos ficticios.
+- `tests/` — pruebas.
+- `docs/`
+  - `manual-tecnico.md`
+  - `manual-usuario.md`
+  - `plan-testing.md`
+  - `bitacora-ia.md`
+  - `diagrama-mer.png`
+- `README.md`
+- `.gitignore`
+
+No publiques secretos, contraseñas ni configuraciones sensibles. Incluí instrucciones para preparar el entorno de forma segura.
+
+---
+
+# 14. PLAN DE OCHO SEMANAS
+
+El orden puede ajustarse con justificación, pero deben conservarse las entregas obligatorias.
+
+## Semana 1 — Planificación
+- Definir ficha del proyecto.
+- Confirmar alcance inicial y requisitos.
+- Escribir historias de usuario y criterios de aceptación.
+- Investigar RBAC/permisos, inyección SQL, `.htaccess`, metodología ágil y pruebas.
+- Crear repositorio GitHub y Personal Kanban.
+- Definir límites WIP (cantidad máxima de tareas en curso).
+
+**Entregables:** ficha, requisitos, investigación inicial, Kanban y repositorio.
+
+## Semana 2 — Modelo y base de datos
+- Diseñar MER (Modelo Entidad-Relación).
+- Revisar las tablas necesarias.
+- Crear tablas con PK, FK y restricciones.
+- Insertar 5–10 registros ficticios coherentes por tabla.
+- Probar relaciones.
+
+**Entregables:** diagrama MER y script SQL.
+
+## Semana 3 — Autenticación, roles y permisos
+- Implementar login y sesiones.
+- Guardar contraseñas con hash seguro.
+- Definir roles adaptados a LifeFlow y demostrar las cuatro capacidades obligatorias.
+- Probar accesos permitidos y denegados.
+- Separar los datos por usuario.
+
+**Entregable:** autenticación y control de acceso funcional.
+
+## Semana 4 — CRUD y hábitos
+- Implementar crear, consultar, editar y eliminar donde corresponda.
+- Crear módulos de tareas y hábitos.
+- Registrar cumplimiento y estados.
+- Prevenir duplicados según reglas definidas.
+- Empezar y ejecutar la matriz de pruebas manuales.
+
+**Entregable:** módulos de tareas y hábitos funcionales.
+
+## Semana 5 — Rutinas, calendario e integración
+- Implementar rutinas estándar y excepciones puntuales.
+- Crear panel diario y vistas del calendario.
+- Integrar Select2.
+- Implementar configuración adaptable local/producción.
+- Implementar una prueba unitaria demostrable.
+- Desarrollar rachas/estadísticas según reglas aprobadas, si el alcance lo permite.
+
+**Entregable:** módulos integrados y prueba unitaria.
+
+## Semana 6 — Despliegue y backup
+- Desplegar en InfinityFree.
+- Configurar la conexión a base de datos de producción.
+- Aplicar `.htaccess` y proteger archivos.
+- Generar backup SQL.
+- Verificar restauración y probar la aplicación publicada.
+
+**Entregable:** aplicación accesible en producción y backup verificado.
+
+## Semana 7 — Pruebas y documentación
+- Ejecutar matriz de pruebas y corregir errores.
+- Completar manual técnico.
+- Completar manual de usuario con capturas.
+- Registrar uso de IA en `docs/bitacora-ia.md`.
+- Revisar repositorio, README y diagrama.
+
+**Entregable:** documentación completa y pruebas registradas.
+
+## Semana 8 — Validación y defensa
+- Validar funciones comprometidas.
+- Revisar Kanban, código, seguridad y base de datos.
+- Probar despliegue y restauración.
+- Preparar defensa oral individual y explicar decisiones, relaciones, permisos, pruebas y seguridad.
+
+**Entregable:** versión final lista para presentar y defender.
+
+Las pruebas deben realizarse durante todo el desarrollo, no solamente en la semana 7. Cada semana debe producir algo verificable.
+
+---
+
+# 15. HISTORIAS DE USUARIO INICIALES
+
+Tomalas como borrador y revisalas cuando se defina el diseño.
+
+- **HU-01 — Inicio de sesión:** como usuario, quiero ingresar con mis credenciales para acceder a mis datos; credenciales inválidas se rechazan y las contraseñas no se guardan en texto plano.
+- **HU-02 — Gestión de tareas:** como usuario, quiero crear, consultar, editar y gestionar mis tareas con validación y permisos.
+- **HU-03 — Gestión de hábitos:** como usuario, quiero definir hábitos y registrar su cumplimiento por fecha sin duplicaciones indebidas.
+- **HU-04 — Rachas:** como usuario, quiero ver mi racha actual y mejor racha según registros, frecuencia y regla del 70 % aprobada.
+- **HU-05 — Rutinas:** como usuario, quiero definir rutinas estándar para días elegidos de la semana y consultar sus actividades.
+- **HU-06 — Excepciones de rutina:** como usuario, quiero cambiar o cancelar una actividad en una fecha concreta sin alterar automáticamente todas las repeticiones futuras.
+- **HU-07 — Panel y calendario:** como usuario, quiero ver tareas, hábitos y actividades correspondientes a la fecha seleccionada.
+- **HU-08 — Estadísticas:** como usuario, quiero consultar porcentajes, rachas y tareas terminadas a partir de mis registros.
+- **HU-09 — Permisos:** como sistema, debo rechazar en el servidor las acciones no autorizadas.
+- **HU-10 — Cuenta padre/hijo:** como adulto autorizado, quiero gestionar las funciones acordadas para las cuentas vinculadas, respetando privacidad, permisos y una posible desvinculación futura.
+
+Cada historia debe tener criterios de aceptación comprobables. No las consideres completas hasta definir sus reglas pendientes.
+
+---
+
+# 16. DECISIONES PENDIENTES Y RIESGOS
+
+Ayudame a resolver ordenadamente:
+1. Alcance realista de la primera versión escolar frente a la visión completa.
+2. Cálculo del 70 % de hábitos diarios.
+3. Significado de restaurar una racha y justificación de un día.
+4. Estados que aplican a tareas y a hábitos.
+5. Recurrencias diarias, semanales, mensuales y personalizadas.
+6. Tareas repetitivas y relación con proyectos.
+7. Actividades sin hora y actividades que cruzan medianoche.
+8. Diferencia entre cambiar una ocurrencia y cambiar la rutina estándar.
+9. Categorías, colores y proyectos personalizables.
+10. Recompensas, metas e insignias para la primera versión.
+11. Permisos de la cuenta padre, autonomía del hijo y desvinculación.
+12. Adaptación de los roles a las cuatro capacidades obligatorias.
+13. Tipos y canales de notificaciones.
+14. Formatos de exportación.
+15. Servicios gratuitos de despliegue y sus limitaciones.
+16. Separación de datos por usuario y protección de datos de menores.
+17. Tablas adicionales necesarias.
+18. Cómo conservar una experiencia sencilla a pesar de la cantidad de funciones.
+
+No decidas todo de una sola vez si dificulta el trabajo. Priorizá lo que afecta al modelo de datos, la seguridad y el alcance.
+
+---
+
+# 17. CRITERIOS DE ÉXITO
+
+Para mí, el éxito es terminar las ocho semanas con una aplicación funcional que sea una base creíble para convertirse en una app real.
+
+La entrega escolar debe:
+- Cumplir los requisitos académicos.
+- Tener una interfaz minimalista, tranquila, profesional y fácil de usar.
+- Demostrar las funciones comprometidas sin errores críticos.
+- Tener autenticación, permisos y separación de datos seguras.
+- Tener base de datos coherente, datos ficticios y consultas preparadas.
+- Tener pruebas, una prueba unitaria, documentación, bitácora de IA y repositorio.
+- Estar publicada y tener un backup probado.
+- Poder explicarse y defenderse individualmente.
+
+No afirmes que una función está terminada, es segura o está desplegada sin haberlo comprobado.
+
+---
+
+# 18. INSTRUCCIONES PARA TRABAJAR CONMIGO
+
+1. Empezá resumiendo la visión de LifeFlow con tus palabras.
+2. Separá claramente **decisiones confirmadas**, **propuestas** y **preguntas pendientes**.
+3. Detectá contradicciones o ambigüedades sin borrar mis preferencias. Por ejemplo, quiero “todo” en la primera versión, pero el plazo es de ocho semanas; ayudame a planificar etapas sin perder la visión futura.
+4. Proponé una definición funcional clara y preguntame por los puntos críticos antes de escribir código.
+5. Después definí historias de usuario, criterios de aceptación, alcance inicial y modelo de datos.
+6. Explicá el MER y cada tabla en lenguaje sencillo antes de generar SQL.
+7. Diseñá una matriz de permisos que demuestre Crear, Editar, Eliminar y Solo Lectura.
+8. Organizá el trabajo en Kanban y ocho semanas con entregas comprobables.
+9. Al programar, avanzá por módulos pequeños y explicá qué hace cada parte y cómo probarla.
+10. Registrá decisiones y uso de IA para facilitar la documentación académica.
+11. Si proponés cambios de alcance, herramientas o arquitectura, explicá motivo, complejidad y alternativas. Priorizá opciones gratuitas.
+12. No empieces a programar salvo que yo lo pida explícitamente.
+13. La primera respuesta después de recibir este prompt debe ser un **documento de definición funcional de LifeFlow**, con requisitos confirmados, requisitos por aclarar, riesgos, alcance académico recomendado y las preguntas más importantes para avanzar. No generes código en esa primera respuesta.
+
+FIN DEL PROMPT MAESTRO
