@@ -1,0 +1,25 @@
+Inyeccion SQL
+
+Una inyeccion SQL es cuando alguien escribe codigo SQL dentro de un campo de formulario (email, nombre, etc) y el sistema lo ejecuta como si fuera parte del codigo real 
+
+SELECT * FROM usuarios WHERE email = '' OR '1'='1' -- ' AND clave = '...'
+
+'1'='1': siempre es verdadero
+--: convierte todo lo que le sigue en comentario, por lo que ignora la contraseña
+
+.htaccess
+
+un archivo htaccess es un archivo de texto que le dice al servidor de apache como comportarse
+
+
+funciones principales:
+- redireccionar a otras paginas
+- proteger carpetas con contraseña (.htpasswd)
+- comprime archivos y gestiona la caché del navegador para mejor rendimiento
+- posibilidad de que los sitios puedan poner su propia pagina de error (
+error 404)
+
+Options -Indexes: evita que se muestre una lista de archivos en la carpeta donde está, pero no impide que se acceda a un archivo si se conoce su direccion (sabattini.com/subidas/imagen.png)
+
+// profe, por si lee esto, esto lo hice hace algunos dias, faltan algunas cosas y luego toca pasarlo a documento 👍
+
