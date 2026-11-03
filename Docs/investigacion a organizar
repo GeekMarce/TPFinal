@@ -7,19 +7,39 @@ SELECT * FROM usuarios WHERE email = '' OR '1'='1' -- ' AND clave = '...'
 '1'='1': siempre es verdadero
 --: convierte todo lo que le sigue en comentario, por lo que ignora la contraseña
 
+- prepare: es el metodo mas efectivo para prevenir una inyeccion SQL, trata a los valores introducidos por el usuario como "estrictamente datos" y nunca codigo ejecutable
+
+- bind_param: utiliza marcadores de posicion y garantiza un manejo correcto de los tipos, protegiendo las entradas numericas y de cadena
+
+- execute: hace que la consulta ya este decidida desde el prepare y se asegura de que sean datos tratados como valores.
+
+
 .htaccess
 
 un archivo htaccess es un archivo de texto que le dice al servidor de apache como comportarse
-
 
 funciones principales:
 - redireccionar a otras paginas
 - proteger carpetas con contraseña (.htpasswd)
 - comprime archivos y gestiona la caché del navegador para mejor rendimiento
-- posibilidad de que los sitios puedan poner su propia pagina de error (
-error 404)
+- posibilidad de que los sitios puedan poner su propia pagina de error (error 404)
+ 
+que bloquea?
+- Direcciones IP
+- bloquea trafico de paises especificos
+- bots
+- paginas privadas (panel de administracion)
+- Hotlinking, evita que otras paginas web roben ancho de banda
+
+
 
 Options -Indexes: evita que se muestre una lista de archivos en la carpeta donde está, pero no impide que se acceda a un archivo si se conoce su direccion (sabattini.com/subidas/imagen.png)
 
-// profe, por si lee esto, esto lo hice hace algunos dias, faltan algunas cosas y luego toca pasarlo a documento 👍
+RBAC (Control De Acceso Basado en Roles) es un sistema que restringe a usuarios el acceso a ciertas partes del sistema y datos basado es su tipo de rol
 
+config.php: sirve para guardar datos de configuraciones esenciales de un sistema o web escrita en PHP
+
+funciones principales:
+- conexion a base de datos: almacena credenciales indispensables (nombre de la base de datos, nombres de usuario, contraseñas, etc)
+- seguridad y claves de cifrado: contiene las claves de seguridad (salt keys) que dan una capa de proteccion a las cookies y sesiones de usuario
+- modo debug (o depuracion): permite activar o desactivar parametros de desarrollador, para testear la web, ver que todo funcione, hacer control a fondo, etc
