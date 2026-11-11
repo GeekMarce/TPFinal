@@ -1,0 +1,4 @@
+# No subir claves reales de producción
+config.local.php
+.env
+*.log

@@ -1,0 +1,13 @@
+# Seguridad (Apache 2.4). Esta carpeta es la raíz del proyecto; solo public/ debe ser web.
+Options -Indexes
+
+# Archivos sensibles: no se pueden descargar escribiendo su dirección en el navegador.
+<Files "config.php">
+    Require all denied
+</Files>
+<FilesMatch "\.(sql|docx|txt|md|log)$">
+    Require all denied
+</FilesMatch>
+
+# Carpetas internas: respuesta 403 si alguien intenta entrar por la web.
+RedirectMatch 403 (?i)(^|/)(database|src|tests|tools)(/|$)

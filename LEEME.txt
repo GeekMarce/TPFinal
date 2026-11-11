@@ -1,0 +1,107 @@
+LIFEFLOW — PÁGINA COMPLETA (login + base de datos original)
+
+Requisitos: Apache, PHP 8 con PDO MySQL y MySQL/MariaDB (por ejemplo XAMPP).
+
+PUESTA EN MARCHA (XAMPP)
+1. Copiá la carpeta lifeflow_web en C:\xampp\htdocs\
+2. Iniciá Apache y MySQL.
+3. Base de datos: si ya tenés la base "lifeflow" con tus datos, NO la importes de nuevo:
+   la página usa la que ya existe. Si no la tenés, creá "lifeflow" (utf8mb4_unicode_ci)
+   en http://localhost/phpmyadmin e importá database/lifeflow.sql.
+4. OPCIONAL (recomendado): importá database/extra_excepciones_rutina.sql en la base lifeflow.
+   Agrega una tabla nueva (no toca ninguna existente) para poder cambiar o cancelar una
+   actividad de rutina SOLO un día. Sin ese archivo todo funciona, menos esa opción.
+5. Revisá config.php (viene para XAMPP: 127.0.0.1, 3306, lifeflow, root, sin clave).
+6. Abrí http://localhost/lifeflow_web/public/
+
+CUENTAS DE LA BASE (correos reales de tu base)
+  admin@lifeflow.test     rol Administrador
+  alex@lifeflow.test      Usuario, perfil público
+  sofia@lifeflow.test     Usuario, cuenta candado (perfil privado)
+  lucas@lifeflow.test     Usuario, perfil público
+  valentina@lifeflow.test Usuario, cuenta candado (perfil privado)
+CONTRASEÑAS: en la base están guardadas como hashes bcrypt y NO se pueden leer ni
+recuperar. Las 5 cuentas tienen exactamente el mismo hash, así que comparten la misma
+contraseña original, pero ni este paquete ni nadie puede decirte cuál es.
+Si no la sabés, podés ponerle una nueva a las cuentas de demostración (solo @lifeflow.test)
+desde la consola, a propósito:
+  cd C:\xampp\htdocs\lifeflow_web
+  C:\xampp\php\php.exe tools\restablecer_clave_demo.php TuClaveNueva1
+(o agregando correos al final para cambiar solo algunas). No se cambia nada por sí solo.
+También podés crear una cuenta propia con "Crear cuenta" en la pantalla de ingreso.
+
+QUÉ HACE LA PÁGINA
+- Visitante sin cuenta (rol Observador, solo lectura): ve la lista de perfiles públicos y el
+  perfil de cada uno (alias, racha, mejor racha, cumplimiento de 30 días, tareas completadas).
+  Una cuenta candado muestra solo "Esta cuenta es privada".
+- Registro propio (alias, correo, contraseña de 8 a 72 caracteres): siempre entra como Usuario.
+- Login con sesión segura (cookie HttpOnly y SameSite, ficha CSRF, límite de intentos,
+  vencimiento a los 30 minutos sin actividad).
+- Hoy: panel diario con progreso "X de Y hábitos" y marca del 70 %, racha actual y mejor racha,
+  hábitos del día con sus 5 estados, justificar el día (texto libre, sin límite), tareas del día
+  y vencidas, y actividades de rutina (incluidas las que pasan la medianoche). Se puede
+  cambiar de fecha y corregir días anteriores.
+- Semana: cuadrícula de hábitos por día, días justificados marcados, tareas y rutinas por día.
+- Tareas: crear, editar, eliminar, cambiar estado; agrupadas en Vencidas, Hoy, Próximas, Sin
+  fecha, y Completadas/canceladas; filtros por categoría (Select2) y estado.
+- Hábitos: nombre, descripción, color, categoría y días concretos de la semana (L M X J V S D).
+- Rutinas: crear, editar, actividades con días y horas opcionales (sin hora o con hora, incluso
+  23:00 a 01:00), 3 plantillas iniciales (BORRADOR: revisalas y editalas en src/plantillas.php),
+  cambiar o cancelar una actividad solo un día (necesita el SQL opcional del paso 4).
+- Categorías: por defecto (copiadas a cada cuenta) y propias, con color.
+- Mi cuenta: datos, alias, cuenta candado y estadísticas (racha, mejor racha, cumplimiento de 30
+  días, tareas, días justificados y últimos días). Tema claro y oscuro.
+- Estilo: grises planos, un solo color de acento y rojo solo para errores.
+- Administración (solo rol Administrador): gestionar cuentas (rol y activa/inactiva) y categorías
+  por defecto. El administrador NO ve hábitos, tareas ni justificaciones de otras personas.
+
+REGLAS DE LA RACHA (solo hábitos; las tareas no cuentan)
+- Un día cumple si los hábitos completados son al menos el 70 % del total del día, sin redondear.
+- Entran en el total los hábitos programados ese día de la semana; pendiente y postergada sin
+  justificación quedan en el total y no suman; cancelada y postergada con justificación salen.
+- Día sin hábitos en el total: mantiene la racha. Día justificado: no la corta y cuenta en ella.
+- El día se evalúa cuando termina: hoy no suma ni corta hasta mañana.
+- La racha nunca se guarda: se calcula desde los registros (corregir un día pasado la recalcula).
+
+ARCHIVOS
+  public/index.html, styles.css, app.js   Interfaz
+  public/api.php        API: sesión, permisos, propiedad de los datos y consultas
+  src/bootstrap.php     Sesión, conexión PDO y validaciones
+  src/Racha.php         Cálculo de la racha (lógica pura)
+  src/plantillas.php    Plantillas de rutina (borrador)
+  config.php            Conexión y entorno (local o producción, detectado solo)
+  .htaccess             Bloquea config.php, database/, src/, tests/ y tools/ desde la web
+  database/             lifeflow.sql (tu base, sin cambios) y el SQL opcional de excepciones
+  tests/RachaTest.php   Prueba unitaria:  php tests/RachaTest.php
+  tools/                Script de claves de demostración (solo consola)
+
+SEGURIDAD
+- Todas las consultas usan sentencias preparadas (PDO prepare + execute con parámetros).
+- Cada acción verifica en el servidor el rol y que el registro sea de la cuenta que lo pide.
+- Contraseñas con password_hash() y password_verify(). El texto de la base se muestra con
+  textContent, así que HTML o scripts escritos en un campo se ven como texto.
+- No subas config.php con claves reales de producción a GitHub.
+
+LO QUE NO HACE / DIFERENCIAS CON LO CONVERSADO
+- Tareas: la base solo tiene 4 estados (pendiente, completada, cancelada, postergada); no
+  distingue postergada con o sin justificación como los hábitos.
+- Historial de correcciones de registros: no se guarda (no hay tabla para eso).
+- Cambiar los días de un hábito recalcula también el pasado (los días no tienen versiones).
+  Un hábito eliminado deja de contar en la racha.
+- La tabla "seguidores" y la columna "foto" existen en tu base pero la página no las usa.
+- No incluye: vista mensual, notificaciones, exportación, recompensas/insignias, proyectos,
+  tareas repetitivas, cuenta padre/hijo.
+- Decisiones mías que conviene revisar: contraseña mínima de 8 caracteres, listado público de
+  perfiles, cumplimiento del perfil medido en los últimos 30 días, alias único, datos del perfil
+  público (propuestos, aún sin confirmar).
+- Usa PDO (como tu login original). El enunciado nombra bind_param (mysqli): si tu profesor lo
+  exige textualmente, hay que convertir las consultas.
+- Select2 se carga desde internet (cdnjs); sin conexión los selectores funcionan como listas
+  comunes.
+
+QUÉ SE PROBÓ Y QUÉ NO
+Probado: PHP 8.3 con su servidor integrado y MariaDB 10.11 con tu base importada: 76 pruebas de
+la API (permisos, propiedad de datos entre cuentas, validaciones, racha, rutinas, excepciones,
+registro, administración) y 20 de la interfaz en un navegador simulado (jsdom), más la prueba
+unitaria de la racha. NO probado: en un Apache/XAMPP real, en InfinityFree, ni en un navegador
+de verdad (diseño visual, Select2 en línea). Los .htaccess no se pudieron comprobar sin Apache.
